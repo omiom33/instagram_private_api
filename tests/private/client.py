@@ -143,9 +143,7 @@ class ClientTests(ApiTestBase):
         self.sleep_interval = 0
         chunk_data = 'abcdefghijklmnopqrstuvwxyz'
         chunk_size = 5
-        chunk_count = 0
-        for chunk_info, data in max_chunk_size_generator(chunk_size, chunk_data):
-            chunk_count += 1
+        for chunk_count, (chunk_info, data) in enumerate(max_chunk_size_generator(chunk_size, chunk_data), start=1):
             self.assertIsNotNone(data, 'Empty chunk.')
             self.assertLessEqual(len(data), chunk_size, 'Chunk size is too big.')
             self.assertEqual(len(data), chunk_info.length, 'Chunk length is wrong.')
